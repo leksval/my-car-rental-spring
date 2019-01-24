@@ -1,13 +1,11 @@
 package pl.blenart.przelewy24;
 
-
 import pl.blenart.przelewy24.Model.ApiResponse;
-//import pl.blenart.przelewy24.Model.RegisterPaymentData;
-//import pl.blenart.przelewy24.Model.VerifyPaymentData;
+import pl.blenart.przelewy24.Model.RegisterPaymentData;
+import pl.blenart.przelewy24.Model.VerifyPaymentData;
 import pl.blenart.support.http.HttpClient;
 import pl.blenart.support.http.Request;
 import pl.blenart.support.http.Response;
-import pl.blenart.payment.*;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -15,7 +13,6 @@ import java.security.MessageDigest;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.lang.*;
 
 public class Przelewy24Api {
     private final String liveHost = "https://secure.przelewy24.pl";

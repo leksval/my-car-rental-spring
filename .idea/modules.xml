@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/my-car-rental-spring.iml" filepath="$PROJECT_DIR$/.idea/my-car-rental-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-car-renta-spring-master/rentalapp.iml" filepath="$PROJECT_DIR$/my-car-renta-spring-master/rentalapp.iml" />
+    </modules>
+  </component>
+</project>

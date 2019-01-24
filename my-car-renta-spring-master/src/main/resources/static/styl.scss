@@ -1,0 +1,50 @@
+
+#tweeter {
+  height: 100%;
+  padding-top: 0px;
+  text-align: center;
+}
+
+#tweeter .button {
+  margin-bottom: 20px;
+}
+
+#tweeter .tweet {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+}
+
+#tweeter .box {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+#tweeter .content small {
+  color: #00d1b2;
+}
+
+#tweeter img {
+  border-radius: 30px;
+}
+
+#tweeter .level-item {
+  padding-left: 10px;
+  color: #00d1b2;
+}
+
+#tweeter input:focus {
+  border-color: #00d1b2;
+}
+
+#tweeter .likes {
+  padding: 0 7.5px;
+}
+
+#tweeter input {
+  font-weight: bold;
+}
+
+#tweeter .tweets-move {
+  transition: transform 1s;
+}

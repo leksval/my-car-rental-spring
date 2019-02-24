@@ -1,5 +1,6 @@
 package pl.blenart.carrental.rental;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReservationRepository {
-    void save(Reservation r);
+    Object save(Reservation r);
 }

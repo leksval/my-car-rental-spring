@@ -40,28 +40,39 @@
                             Segment: {{ car.segment }} <br>
                             Gearbox type: {{ car.gearboxType }} <br>
                             Year: {{ car.manufactureYear }}<br>
-                            Number of seats: {{ car.capacity }}<br>
+                            Number of seats: {{ car.capacity }}<br><br>
+
 
                         </v-card-text>
-                        <v-slide-y-transition>
+                        <transition>
                             <v-card-text v-show="show">
-                                <form ref="v">
+
+
+                                 <v-text-field
+                                            v-model="email"
+
+                                            label="E-mail"
+                                            required
+                                            @input="email.$touch()"
+                                            @blur="email.$touch()"
+                                 ></v-text-field>
                                 <v-text-field
-                                        v-model="name"
-                                        :error-messages="nameErrors"
-                                        label="Name"
+                                        v-model="firstname"
+
+                                        label="Firstame"
                                         required
-                                        @input="$v.name.$touch()"
-                                        @blur="$v.name.$touch()"
+                                        @input="firstname.$touch()"
+                                        @blur="firstname.$touch()"
                                 ></v-text-field>
-                                <v-text-field
-                                        v-model="email"
-                                        :error-messages="emailErrors"
-                                        label="E-mail"
-                                        required
-                                        @input="$v.email.$touch()"
-                                        @blur="$v.email.$touch()"
-                                ></v-text-field>
+                                    <v-text-field
+                                            v-model="lastname"
+
+                                            label="Lastame"
+                                            required
+                                            @input="lastname.$touch()"
+                                            @blur="lastname.$touch()"
+                                    ></v-text-field>
+
 
                                 <b style="text-align:left; color:#950e32;  font-size: medium">  DAYS: {{ days }} </b>
 
@@ -73,29 +84,19 @@
                                     <v-btn color=#950e32  icon @click=" (days < 2) ? noAction(): subtract() ">
                                         <v-icon style=" color:white;"> {{ 'remove' }}</v-icon>
                                     </v-btn>
-
-
-
-
                             </v-card-text>
-                            <v-card-actions>
+                            </v-card-text>
+                        </transition>
 
-                                </v-card-actions>
-                        </v-slide-y-transition>
                         <v-card-actions>
-
-
-                            <v-btn  v-if="show" @click="rent" outline-success  color=#950e32 class="white--text" font-family= 'Calibri Light'> Rent </v-btn>
+                            <v-btn  v-if="show" @click="handler(car)" outline-success  color=#950e32 class="white--text" font-family= 'Calibri Light'> Rent </v-btn>
                             <v-spacer></v-spacer>
                             <b v-if="show" style="text-align: right;color:#950e32;  font-size: medium">PRICE: {{ days*car.price }} PLN </b>
 
                             <b v-if="!show" style="font-family: 'Calibri Light'; color:#950e32; font-size: medium"> {{ car.price }} PLN/DAY</b>
                             <v-btn icon><v-icon >bookmark</v-icon></v-btn>
-
-
                         </v-card-actions>
 
-                        </form>
                     </v-card><p></p>
                     </div>
                 </v-flex>
@@ -112,22 +113,20 @@
 <script >
 
     var dataURL = 'http://localhost:8080/cars';
-
-
+    var sendURL = 'http://localhost:8080/data';
 
     var vue =new Vue({
 
-
         el: '#app',
-
-
 
         data() {
             return {
                 cars: [], // initialize empty array
                 days: '1',
-                name: '',
+                firstname: '',
+                lastname: '',
                 email: '',
+                orderingCarId: '',
             }
         },
 
@@ -140,8 +139,19 @@
                         console.log(error)
                         this.errored = true
                     })
-                    .finally(() => this.loading = false)
+                    .finally(() => this.loading = true)
             },
+
+            sendData: function () {
+                axios.post(sendURL, {data: this.$data})
+                    .then(function (response) {
+                        //do something
+                    }).catch(error => {
+                    console.log(error)
+                    this.errored = true
+                });
+            },
+
 
             subtract() {
                 this.days--;
@@ -150,9 +160,13 @@
                 this.days = 1;
             },
 
-            rent () {
-                this.$v.$touch()
+            setCarID:function(car){
+                this.orderingCarId = car.id;
             },
+            handler:function(car){
+                this.setCarID(car);
+                this.sendData();
+            }
 
         }
 

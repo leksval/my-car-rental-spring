@@ -23,8 +23,9 @@ public class OrderingTest {
                 (a, b) -> new Offer(2000),
                 new ReservationRepository() {
                     @Override
-                    public void save(Reservation r) {
+                    public Object save(Reservation r) {
 
+                        return null;
                     }
                 }
         );
